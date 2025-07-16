@@ -27,7 +27,7 @@ public class BaseTest {
             options.addArguments("--disable-notifications");
 
             driver = new ChromeDriver(options);
-        } else if (browser.equalsIgnoreCase("moilla")) {
+        } else if (browser.equalsIgnoreCase("mozilla")) {
             driver = new FirefoxDriver();
         } else {
             throw new IllegalArgumentException("Unsupported browser: " + browser);
