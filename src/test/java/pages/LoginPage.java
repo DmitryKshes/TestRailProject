@@ -14,9 +14,10 @@ public class LoginPage {
     private final By emailInput = By.id("name");
     private final By passwordField = By.id("password");
     private final By loginButton = By.id("button_primary");
-    private final By loginRequiredNotification = By.xpath("//form/div[text() = 'Email/Login is required.']");
-    private final By passwordRequiredNotification = By.xpath("//form/div[text() = 'Password is required.']");
+    private final By loginRequiredNotification = By.xpath("//div[text() = 'Email/Login is required.']");
+    private final By passwordRequiredNotification = By.xpath("//div[text() = 'Password is required.']");
     private final By invalidDataNotification = By.xpath("//div/div[text() = 'Email/Login or Password is incorrect. Please try again.']");
+    private final By headingOnLoginPage = By.xpath("//h1[text() = 'TestRail QA']");
 
     public void enterEmailValue(String email){
         driver.findElement(emailInput).sendKeys(email);
@@ -30,16 +31,16 @@ public class LoginPage {
         driver.findElement(loginButton).click();
     }
 
-    private WebElement loginNotification(){
-        return driver.findElement(loginRequiredNotification);
+    public String loginNotification(){
+        return driver.findElement(loginRequiredNotification).getText();
     }
 
-    private WebElement passwordNotification() {
-        return driver.findElement(passwordRequiredNotification);
+    public String passwordNotification() {
+        return driver.findElement(passwordRequiredNotification).getText();
     }
 
-    private WebElement invalidData(){
-        return driver.findElement(invalidDataNotification);
+    public String invalidData(){
+        return driver.findElement(invalidDataNotification).getText();
     }
 
     public DashBoardPage login(String email, String password){
@@ -48,6 +49,10 @@ public class LoginPage {
         clickLoginButton();
 
         return new DashBoardPage(driver);
+    }
+
+    public String headingLoginPage() {
+        return driver.findElement(headingOnLoginPage).getText();
     }
 
 }

@@ -5,12 +5,13 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.*;
+import utils.WebDriverProvider;
 
 import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
 
-public class BaseTest {
+public class BaseTest implements WebDriverProvider {
     protected WebDriver driver;
 
     @Parameters({"browser"})
@@ -44,5 +45,10 @@ public class BaseTest {
         if (driver != null){
             driver.quit();
         }
+    }
+
+    @Override
+    public WebDriver getDriver() {
+        return driver;
     }
 }

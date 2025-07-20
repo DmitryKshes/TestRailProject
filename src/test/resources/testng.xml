@@ -1,14 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="RetrySuite">
+<suite name="CrossBrowserSuite" parallel="tests" thread-count="2">
+
     <listeners>
         <listener class-name="utils.RetryListener"/>
+        <listener class-name="utils.AllureTestListener"/>
     </listeners>
 
-    <test name="Chrome">
+    <test name="ChromeTest">
+        <parameter name="browser" value="chrome"/>
         <classes>
             <class name="tests.ui.LoginTest"/>
-            <parameter name="browser" value="chrome"/>
+            <class name="tests.ui.LogoutTest"/>
+            <class name="tests.ui.CreateProjectTest"/>
         </classes>
     </test>
+
+    <test name="FirefoxTest">
+        <parameter name="browser" value="mozilla"/>
+        <classes>
+            <class name="tests.ui.LoginTest"/>
+            <class name="tests.ui.LogoutTest"/>
+            <class name="tests.ui.CreateProjectTest"/>
+        </classes>
+    </test>
+
 </suite>
