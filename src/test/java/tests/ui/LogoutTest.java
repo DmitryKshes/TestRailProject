@@ -12,13 +12,13 @@ import steps.LoginSteps;
 public class LogoutTest extends BaseTest {
 
     @Test(priority = 2, description = "Проверка успешного выхода по кнопке Log Out")
-    public void successLogOutFromApplication() {
+    public void successLogOutFromApplicationTest() {
         LoginSteps loginSteps = new LoginSteps(driver);
-        loginSteps.loginAs("dmitriykshes@gmail.com", "dmitryKshesTMS_1");
+        loginSteps.loginAs(login, password);
         DashboardSteps dashboardSteps = new DashboardSteps(driver);
         dashboardSteps.logout();
         LoginPage loginPage = new LoginPage(driver);
         String checkHeadingLoginPage = loginPage.headingLoginPage();
-        Assert.assertEquals(checkHeadingLoginPage, "TestRail Q", "Not Log Out");
+        Assert.assertEquals(checkHeadingLoginPage, "TestRail QA", "Not Log Out");
     }
 }

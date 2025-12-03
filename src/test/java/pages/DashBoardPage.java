@@ -15,7 +15,7 @@ public class DashBoardPage {
     private final By addProjectButton = By.xpath("//a[@id='sidebar-projects-add']");
     private final By getToProject = By.xpath("//a[text() = 'TMS_Project']");
     private final By buttonAdmin = By.id("navigation-admin");
-    //*[@id="project-1"]/div[2]/div[1]/a
+    private final By getToTestCases = By.xpath("//div[@id='project-6']//a[text() = 'Test Cases']");
 
     public String dashboardPage() {
        return driver.findElement(headerOfPage).getText();
@@ -43,5 +43,10 @@ public class DashBoardPage {
     public AdministrationPage clickButtonAdmin(){
         driver.findElement(buttonAdmin).click();
         return new AdministrationPage(driver);
+    }
+
+    public CreateTestCasePage clickAddTestCases() {
+        driver.findElement(getToTestCases).click();
+        return new CreateTestCasePage(driver);
     }
 }

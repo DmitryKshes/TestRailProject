@@ -2,7 +2,6 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 
 public class CreateProjectPage {
     private WebDriver driver;
@@ -14,6 +13,7 @@ public class CreateProjectPage {
     private final By inputNameOfProject = By.id("name");
     private final By buttonAddProject = By.id("accept");
     private final By buttonCancelAddProject = By.id("admin-integration-form-cancel");
+    private final By deleteProjectButton = By.className("icon-small-delete");
 
     public void nameOfProject(String projectName){
         driver.findElement(inputNameOfProject).sendKeys(projectName);
@@ -26,6 +26,4 @@ public class CreateProjectPage {
     public void cancelAddProject() {
         driver.findElement(buttonCancelAddProject).click();
     }
-
-
 }

@@ -7,12 +7,35 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.*;
 import utils.WebDriverProvider;
 
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Properties;
 
 public class BaseTest implements WebDriverProvider {
     protected WebDriver driver;
+
+    protected static Properties props;
+
+    protected static String baseURL;
+    protected static String login;
+    protected static String password;
+    protected static String baseUrl;
+
+    @BeforeSuite(alwaysRun = true)
+    public void loadProperties() throws IOException {
+        props = new Properties();
+        try (FileInputStream fis = new FileInputStream("local.properties")) {
+            props.load(fis);
+        }
+
+        login    = props.getProperty("login");
+        password = props.getProperty("password");
+        baseURL  = props.getProperty("baseURL");
+        baseUrl = props.getProperty("baseUrl");
+    }
 
     @Parameters({"browser"})
     @BeforeMethod
@@ -37,7 +60,7 @@ public class BaseTest implements WebDriverProvider {
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 
-        driver.get("https://dmitrykshes.testrail.io/index.php?/auth/login/");
+        driver.get(baseURL);
     }
 
     @AfterMethod

@@ -2,6 +2,7 @@ package steps;
 
 import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
+import pages.DashBoardPage;
 import pages.LoginPage;
 
 public class LoginSteps {
@@ -11,10 +12,11 @@ public class LoginSteps {
         this.loginPage = new LoginPage(driver);
     }
 
-    @Step("Логин под пользователем: {email}")
-    public void loginAs(String email, String password){
-        loginPage.enterEmailValue(email);
-        loginPage.enterPasswordValue(password);
-        loginPage.clickLoginButton();
+    @Step(value = "Логин под пользователем: {email}")
+    public DashBoardPage loginAs(String email, String password){
+        loginPage.enterEmailValue(email)
+                 .enterPasswordValue(password)
+                 .clickLoginButton();
+        return new DashBoardPage(loginPage.getDriver());
     }
 }

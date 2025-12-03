@@ -2,10 +2,12 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
 public class LoginPage {
     private WebDriver driver;
+    public WebDriver getDriver(){
+        return driver;
+    }
 
     public LoginPage(WebDriver driver){
         this.driver = driver;
@@ -16,19 +18,22 @@ public class LoginPage {
     private final By loginButton = By.id("button_primary");
     private final By loginRequiredNotification = By.xpath("//div[text() = 'Email/Login is required.']");
     private final By passwordRequiredNotification = By.xpath("//div[text() = 'Password is required.']");
-    private final By invalidDataNotification = By.xpath("//div/div[text() = 'Email/Login or Password is incorrect. Please try again.']");
+    private final By shortPasswordNotification = By.xpath("//div[text() = 'Password is too short (5 characters required).']");
     private final By headingOnLoginPage = By.xpath("//h1[text() = 'TestRail QA']");
 
-    public void enterEmailValue(String email){
+    public LoginPage enterEmailValue(String email){
         driver.findElement(emailInput).sendKeys(email);
+        return this;
     }
 
-    public void enterPasswordValue(String password){
+    public LoginPage enterPasswordValue(String password){
         driver.findElement(passwordField).sendKeys(password);
+        return this;
     }
 
-    public void clickLoginButton(){
+    public LoginPage clickLoginButton(){
         driver.findElement(loginButton).click();
+        return this;
     }
 
     public String loginNotification(){
@@ -40,7 +45,7 @@ public class LoginPage {
     }
 
     public String invalidData(){
-        return driver.findElement(invalidDataNotification).getText();
+        return driver.findElement(shortPasswordNotification).getText();
     }
 
     public DashBoardPage login(String email, String password){

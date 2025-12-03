@@ -12,7 +12,8 @@
         <classes>
             <class name="tests.ui.LoginTest"/>
             <class name="tests.ui.LogoutTest"/>
-            <class name="tests.ui.CreateProjectTest"/>
+            <class name="tests.ui.ProjectTest"/>
+            <class name="tests.ui.CreateTestCaseTest"/>
         </classes>
     </test>
 
@@ -21,7 +22,15 @@
         <classes>
             <class name="tests.ui.LoginTest"/>
             <class name="tests.ui.LogoutTest"/>
-            <class name="tests.ui.CreateProjectTest"/>
+            <class name="tests.ui.ProjectTest"/>
+            <class name="tests.ui.CreateTestCaseTest"/>
+        </classes>
+    </test>
+
+    <test name="ApiTest">
+        <classes>
+            <class name="tests.api.ProjectTest"/>
+            <class name="tests.api.TestCaseTest"/>
         </classes>
     </test>
 

@@ -6,7 +6,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.DashBoardPage;
-import pages.LoginPage;
 
 import java.time.Duration;
 
@@ -19,7 +18,7 @@ public class DashboardSteps {
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(3));
     }
 
-    @Step("Выход из системы авторизованным пользователем: {email}")
+    @Step(value = "Выход из системы авторизованным пользователем: {email}")
     public void logout(){
         dashBoardPage.openDropDownMenu();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("navigation-user-logout")));
