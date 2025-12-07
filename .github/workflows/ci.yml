@@ -39,7 +39,7 @@ jobs:
           echo "projectId=${{ secrets.PROJECT_ID }}" >> local.properties
 
       - name: run maven tests
-        run: mvn clean compile test
+        run: mvn clean test
         
       - name: upload allure results
         uses: actions/upload-artifact@v4
