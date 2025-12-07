@@ -39,7 +39,7 @@ jobs:
           echo "projectId=${{ secrets.PROJECT_ID }}" >> local.properties
 
       - name: run maven tests
-        run: mvn clean compile test -DsuiteXmlFile=target/test-classes/testng.xml
+        run: mvn clean compile test
         
       - name: upload allure results
         uses: actions/upload-artifact@v4
