@@ -1,0 +1,48 @@
+name: run tests and save report
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  schedule: 
+  - cron: '0 0 * * *'
+
+jobs:
+  run-tests:
+    name: run UI + API tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout repository
+        uses: actions/checkout@v4
+
+      - name: set up java
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+
+      - name: cache maven dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
+
+      - name: create local.properties from secrets
+        run: |
+          echo "baseURL=${{ secrets.BASE_URL }}" >> local.properties
+          echo "login=${{ secrets.LOGIN }}" >> local.properties
+          echo "password=${{ secrets.PASSWORD }}" >> local.properties
+          echo "baseUrl=${{ secrets.BASE_URL_API }}" >> local.properties
+          echo "projectId=${{ secrets.PROJECT_ID }}" >> local.properties
+
+      - name: run maven tests
+        run: mvn clean test
+        
+      - name: upload allure results
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-results
+          path: target/allure-results
