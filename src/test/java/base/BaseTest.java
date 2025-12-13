@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.testng.annotations.*;
 import utils.WebDriverProvider;
 
@@ -48,11 +49,21 @@ public class BaseTest implements WebDriverProvider {
             prefs.put("credentials_enable_service", false);
             prefs.put("profile.password_manager_enabled", false);
             options.setExperimentalOption("prefs", prefs);
+
             options.addArguments("--disable-notifications");
+            options.addArguments("--headless=new");
+            options.addArguments("--no-sandbox");
+            options.addArguments("--disable-dev-shm-usage");
+
+            options.addArguments("--disable-notifications");
+            options.addArguments("--window-size=1920,1080");
 
             driver = new ChromeDriver(options);
         } else if (browser.equalsIgnoreCase("mozilla")) {
-            driver = new FirefoxDriver();
+            FirefoxOptions options = new FirefoxOptions();
+            options.addArguments("--headless");
+            options.addArguments("--window-size=1920,1080");
+            driver = new FirefoxDriver(options);
         } else {
             throw new IllegalArgumentException("Unsupported browser: " + browser);
         }
