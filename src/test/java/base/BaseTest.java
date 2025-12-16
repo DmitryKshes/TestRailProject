@@ -51,7 +51,7 @@ public class BaseTest implements WebDriverProvider {
             options.setExperimentalOption("prefs", prefs);
 
             options.addArguments("--disable-notifications");
-            options.addArguments("--headless=new");
+            options.addArguments("--headless");
             options.addArguments("--no-sandbox");
             options.addArguments("--disable-dev-shm-usage");
 
@@ -74,7 +74,7 @@ public class BaseTest implements WebDriverProvider {
         driver.get(baseURL);
     }
 
-    @AfterMethod
+    @AfterMethod(alwaysRun = true, description = "Закрытие браузера")
     public void tearDown() {
         if (driver != null){
             driver.quit();
